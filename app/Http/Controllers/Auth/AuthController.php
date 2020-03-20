@@ -20,7 +20,7 @@ class AuthController extends Controller
         $data = [ 'email' => strtolower($request->input('email')), 'password' => $request->input('pass') ];
         if (!Auth::attempt($data)) return back()->withInput()->with('error', 'Invalid Credentials');
 
-        return redirect(route('dashboard'));
+        return redirect(route('dash'));
     }
 
     public function doRegister(Request $request) {
