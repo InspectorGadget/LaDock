@@ -13,11 +13,11 @@ class RouteController extends Controller
     }
 
     public function showLogin() {
-        return "Login";
+        return view('login.index');
     }
 
     public function showRegister() {
-        return "Register";
+        return view('register.index');
     }
 
 }
