@@ -20,4 +20,8 @@ class RouteController extends Controller
         return view('register.index');
     }
 
+    public function showDashboard() {
+        return view('dashboard.index');
+    }
+
 }

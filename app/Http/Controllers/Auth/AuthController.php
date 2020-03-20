@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -14,25 +15,36 @@ class AuthController extends Controller
     public function doLogin(Request $request) {
         $validate = Validator::make($request->all(), [
            'email' => 'required',
-           'password' => 'required'
+           'pass' => 'required'
         ]);
 
         if ($validate->fails()) return back()->withInput()->with('error', 'Invalid Credentials Input');
-        $data = [ 'email' => strtolower($request->input('email')), 'password' => $request->input('password') ];
-        if (!Auth::validate($data)) return back()->withInput()->with('error', 'Invalid Credentials');
+        $data = [ 'email' => strtolower($request->input('email')), 'password' => $request->input('pass') ];
+        if (!Auth::attempt($data)) return back()->withInput()->with('error', 'Invalid Credentials');
 
-        return redirect()->intended('/dashboard');
+        return redirect(route('dashboard'));
     }
 
     public function doRegister(Request $request) {
         $validate = Validator::make($request->all(), [
            'email' => 'required',
-           'password' => 'required'
+           'pass' => 'required'
         ]);
 
         if ($validate->fails()) return back()->withInput()->with('error', 'Invalid Input');
-        $user = User::all()->find('email', strtolower($request->input('email')));
-        dd($user);
+        $count = User::all()->where('email', strtolower($request->input('email')));
+        if (count($count) > 0) return back()->with('error', 'A user with this Email exists!');
+
+        try {
+            $user = new User();
+            $user->email = strtolower($request->input('email'));
+            $user->password = Hash::make($request->input('pass'));
+            $user->save();
+        } catch (\Exception $exception) {
+            return dd($exception->getMessage());
+        }
+
+        return redirect(route('login'))->with('message', 'You have been successfully registered!');
     }
 
 }

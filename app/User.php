@@ -37,4 +37,17 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function getRoleId(): int {
+        return $this->role;
+    }
+
+    public function getRoleName(): string {
+        $array = [
+            0 => "User",
+            1 => "Admin"
+        ];
+
+        return $array[$this->role];
+    }
 }

@@ -39,7 +39,7 @@
         </li>
         @if (Route::has('login') && Route::has('register'))
             <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="#page-top">Login</a>
+                <a class="js-scroll-trigger" href="{{ route('login') }}">Login</a>
             </li>
 
             <li class="sidebar-nav-item">
@@ -54,7 +54,7 @@
     <div class="container text-center my-auto">
         <h1 class="mb-1">LaDock</h1>
         <h3 class="mb-5">
-            <em>Dockerize your MCPE Servers like an absolute Boss!</em>
+            <em>Dockerize your MCPE Server like an absolute Boss & with one click!</em>
         </h3>
         @if (Route::has('login') && Route::has('register'))
             <a class="btn btn-success btn-xl" href="{{ route('login') }}">Login</a>
@@ -69,7 +69,7 @@
     <div class="container">
       <ul class="list-inline mb-5">
         <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="https://github.com/InspectorGadget" target="_blank">
+          <a class="social-link rounded-circle text-white" href="https://github.com/InspectorGadget/LaDock" target="_blank">
             <i class="icon-social-github"></i>
           </a>
         </li>
