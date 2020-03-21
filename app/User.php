@@ -50,4 +50,8 @@ class User extends Authenticatable
 
         return $array[$this->role];
     }
+
+    public function getContainers() {
+        return $this->hasMany(Container::class, 'user_id', 'id')->get();
+    }
 }

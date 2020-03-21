@@ -37,31 +37,21 @@
 </head>
 
 <body>
-  <!-- container section start -->
   <section id="container" class="">
-
-
     <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
 
-      <!--logo start-->
       <a href="{{ route('dashboard') }}" class="logo">La <span class="lite">Dock</span></a>
-      <!--logo end-->
 
       <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
-          <!-- user login dropdown start-->
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
-                            </span>
-                            <span class="username">{{ auth()->user()->email }}</span>
-                            <b class="caret"></b>
-                        </a>
+                <span class="username">{{ auth()->user()->email }}</span>
+                <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
@@ -72,17 +62,12 @@
               </li>
             </ul>
           </li>
-          <!-- user login dropdown end -->
         </ul>
-        <!-- notificatoin dropdown end-->
       </div>
     </header>
-    <!--header end-->
 
-    <!--sidebar start-->
     <aside>
       <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="{{ route('dashboard') }}">
@@ -91,79 +76,19 @@
             </a>
           </li>
         </ul>
-        <!-- sidebar menu end-->
       </div>
     </aside>
-    <!--sidebar end-->
 
-    <!--main content start-->
     <section id="main-content">
-      <section class="wrapper">
-        <!--overview start-->
-        <div class="row">
-          <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
-            <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="{{ route('dashboard') }}">Home</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
-            </ol>
-          </div>
-        </div>
+      @yield('content')
 
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box blue-bg">
-              <i class="fa fa-cloud-download"></i>
-              <div class="count">6.674</div>
-              <div class="title">Download</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-shopping-cart"></i>
-              <div class="count">7.538</div>
-              <div class="title">Purchased</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-o-up"></i>
-              <div class="count">4.362</div>
-              <div class="title">Order</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <i class="fa fa-cubes"></i>
-              <div class="count">1.426</div>
-              <div class="title">Stock</div>
-            </div>
-            <!--/.info-box-->
-          </div>
-          <!--/.col-->
-
-        </div>
-        <!--/.row-->
-
-      </section>
       <div class="text-center">
         <div class="credits">
           A Panel by <a href="https://github.com/InspectorGadget" target="_blank">InspectorGadget</a>. All rights reserved LaDock &copy;
         </div>
       </div>
     </section>
-    <!--main content end-->
   </section>
-  <!-- container section start -->
 
   <!-- javascripts -->
   <script src="{{ asset('dash/js/jquery.js') }}"></script>
@@ -214,41 +139,6 @@
             $(this.i).val(this.cv + '%')
           }
         })
-      });
-
-      //carousel
-      $(document).ready(function() {
-        $("#owl-slider").owlCarousel({
-          navigation: true,
-          slideSpeed: 300,
-          paginationSpeed: 400,
-          singleItem: true
-
-        });
-      });
-
-      //custom select box
-
-      $(function() {
-        $('select.styled').customSelect();
-      });
-
-      /* ---------- Map ---------- */
-      $(function() {
-        $('#map').vectorMap({
-          map: 'world_mill_en',
-          series: {
-            regions: [{
-              values: gdpData,
-              scale: ['#000', '#000'],
-              normalizeFunction: 'polynomial'
-            }]
-          },
-          backgroundColor: '#eef3f7',
-          onLabelShow: function(e, el, code) {
-            el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-          }
-        });
       });
     </script>
 
